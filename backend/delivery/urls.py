@@ -1,6 +1,12 @@
-from django.conf import settings
-from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from . import views
 
-urlpatterns = []
+
+router = DefaultRouter()
+router.register("shops", views.ShopViewSet)
+
+urlpatterns = [
+    path("api/", include(router.urls)),
+]
 

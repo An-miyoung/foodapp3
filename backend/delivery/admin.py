@@ -18,7 +18,9 @@ class ItemAdmin(admin.ModelAdmin):
     list_filter = ("shop",)
 
     def photo_tag(self, item):
-        return mark_safe(f"<img src={item.photo.url} style='width: 100px;' />")
+        return mark_safe(
+            f"<img src={item.photo.url} style='width: 100px; height: 80px' />"
+        )
 
 
 @admin.register(Order)

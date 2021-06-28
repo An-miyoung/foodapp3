@@ -12,8 +12,9 @@ class TimestampedModel(models.Model):
 
 
 class Shop(TimestampedModel):
+
     name = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to="order/${shop}/")
+    photo = models.ImageField(upload_to="shops/")
     tel = models.CharField(
         max_length=20, validators=[RegexValidator(r"^\d{2,3}-?[1-9]\d{3}-?\d{4}$")]
     )
@@ -29,7 +30,7 @@ class Shop(TimestampedModel):
 class Item(TimestampedModel):
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to="order/%(shop.name)/items")
+    photo = models.ImageField(upload_to="items/")
     price = models.PositiveIntegerField()
 
     class Meta:
