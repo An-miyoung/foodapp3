@@ -1,0 +1,32 @@
+.app {
+  display: grid;
+  gap: 1rem;
+
+  background-color: lightyellow;
+  width: 600px;
+  max-width: 100%;
+  margin: 0 auto;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+
+    .logo {
+      margin-top: 0.25rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+    .search {
+    }
+    .topnav {
+    }
+  }
+  .contents {
+    justify-self: center;
+  }
+  .footer {
+    justify-self: center;
+  }
+}
