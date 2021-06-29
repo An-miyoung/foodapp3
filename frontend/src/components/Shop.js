@@ -9,7 +9,7 @@ export default function Shop({shop}) {
         <Card hoverable
             title={name}
             style = {{width:"250px", marginBottom: "1rem"}}
-            cover={<img src={photo} alt={name} />}
+            cover={<img src={photo} alt={name} style={{height:'200px'}}/>}
             actions={[<Link to={{ pathname: "/menu", state: { shop_id: id }}}>
                         메뉴보기
                     </Link>]}
