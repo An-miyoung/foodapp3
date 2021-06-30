@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { Card, Form, Input, Button, notification } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
+import useLocalStorage from "utils/useLocalStorage";
 
-export default function Signup() {
+export default function Login() {
     const history = useHistory();
+    const [jwtToken, setJwtToken] = useLocalStorage("jwtToken", "");
     const [fieldErrors, setFieldErrors] = useState({});
+
+    console.log("loaded jwtToken: ", jwtToken);
 
     const onFinish = (values) => {
 
@@ -15,19 +19,23 @@ export default function Signup() {
             setFieldErrors({});
             const data = { username, password };
             try {
-                const response = await Axios.post("http://localhost:8000/accounts/signup/", data);
-            
+                const response = await Axios.post("http://localhost:8000/accounts/token/", data);
+                const { data: { token: jwtToken } } = response;
+
+                console.log("response: ", response);
+
                 notification.open({
-                    message: "회원가입을 축하합니다.",
-                    description: "로그인페이지로 이동합니다",
+                    message: "로그인했습니다.",
                     icon: <SmileOutlined style={{ color: "#108ee9"}}/>
                 })
-                history.push("accounts/login");
+                // history.push("/");
+                // // history.push(loginRedirectUrl);
+                
             }
             catch(error) {
                 if (error.response) {
                     notification.open({
-                        message: "회원가입에 실패했습니다.",
+                        message: "로그인에 실패했습니다.",
                         description: "아이디, 비밀번호를 확인해주세요",
                         icon: <FrownOutlined style={{ color: "#ff3333" }} />
                     })
@@ -52,7 +60,7 @@ export default function Signup() {
     return (
         <Card title="로그인"
               hoverable
-              style = {{width:"250px", height:"342px",marginBottom: "1rem"}}
+              style = {{width:"250px", height:"342px", marginBottom: "1rem"}}
         >
            <Form
                 {...layout}
@@ -67,6 +75,7 @@ export default function Signup() {
                     ]}
                     hasFeedback
                     {...fieldErrors.username}
+                    {...fieldErrors.non_field_errors}
                 >
                     <Input />
                 </Form.Item>
@@ -84,14 +93,12 @@ export default function Signup() {
 
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit">
-                    가입하기
+                    로그인
                     </Button>
                 </Form.Item>
             </Form>          
-            
         </Card>
-    );
-    
+    )
 }
 
 const layout = {
