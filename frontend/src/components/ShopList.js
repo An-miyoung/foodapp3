@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import Shop from "./Shop";
+import { useAppContext } from "store";
 
 export default function ShopList() {
+    const { store: { jwtToken } } = useAppContext();
+    
     const apiUrl = "http://localhost:8000/api/shops/";
     const [shopList, setShopList] = useState([]);
 

@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Axios from "axios";
 import { Card, Form, Input, Button, notification } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
-import useLocalStorage from "utils/useLocalStorage";
+import { useAppContext, setToken } from "store";
 
 export default function Login() {
+    const { store, dispatch } = useAppContext();
     const history = useHistory();
-    const [jwtToken, setJwtToken] = useLocalStorage("jwtToken", "");
-    const [fieldErrors, setFieldErrors] = useState({});
 
-    console.log("loaded jwtToken: ", jwtToken);
+    const [fieldErrors, setFieldErrors] = useState({});
 
     const onFinish = (values) => {
 
@@ -21,8 +20,9 @@ export default function Login() {
             try {
                 const response = await Axios.post("http://localhost:8000/accounts/token/", data);
                 const { data: { token: jwtToken } } = response;
+                console.log("jwtToken: ", jwtToken);
 
-                console.log("response: ", response);
+                dispatch(setToken(jwtToken));
 
                 notification.open({
                     message: "로그인했습니다.",
