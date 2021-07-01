@@ -5,6 +5,8 @@ import { useAppContext } from "store";
 export default function LoginRequiredRoute({ component: Component, ...kwargs }) {
     const { store : { isAuthenticated }} = useAppContext();
 
+    console.log("isAuthenticated: ", isAuthenticated);
+
     if ( isAuthenticated ) {
         
     }
@@ -27,5 +29,4 @@ export default function LoginRequiredRoute({ component: Component, ...kwargs }) 
         }
         }/>
     )
-
 }
