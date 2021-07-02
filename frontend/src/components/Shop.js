@@ -1,11 +1,14 @@
 import React from "react";
-import { Card } from "antd";
+import { Button, Card } from "antd";
 import { Link } from 'react-router-dom';
+// import ItemList from "./ItemList";
 
 
 export default function Shop({shop}) {
-    const { id, name, photo, tel, addr } = shop;
+    const { id, name, photo, tel, addr, items } = shop;
+    
     return (
+        <>
         <Card hoverable
             title={name}
             style = {{width:"250px", marginBottom: "1rem"}}
@@ -19,6 +22,6 @@ export default function Shop({shop}) {
                 description={addr}
             />
         </Card> 
-
+        </>
     );
 }

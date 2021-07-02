@@ -22,7 +22,7 @@ export default function Signup() {
                     description: "로그인페이지로 이동합니다",
                     icon: <SmileOutlined style={{ color: "#108ee9"}}/>
                 })
-                history.push("/accounts//login");
+                history.push("/accounts/login");
             }
             catch(error) {
                 if (error.response) {

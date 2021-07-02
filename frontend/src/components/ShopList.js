@@ -10,6 +10,7 @@ export default function ShopList() {
     const [shopList, setShopList] = useState([]);
 
     useEffect(() => {
+        const headers = { 'Authorization': `JWT ${jwtToken}` };
         Axios.get(apiUrl)
         .then(response => {
             console.log("response: ", response)

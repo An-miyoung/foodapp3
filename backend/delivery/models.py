@@ -1,3 +1,4 @@
+from enum import unique
 from django.conf import settings
 from django.db import models
 from django.core.validators import RegexValidator
@@ -28,12 +29,13 @@ class Shop(TimestampedModel):
 
 
 class Item(TimestampedModel):
-    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    shop = models.ForeignKey(Shop, related_name="items", on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     photo = models.ImageField(upload_to="items/")
     price = models.PositiveIntegerField()
 
     class Meta:
+        unique_together = ("shop", "name")
         ordering = ["-id"]
 
     def __str__(self):
