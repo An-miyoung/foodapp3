@@ -2,11 +2,14 @@ FROM ubuntu:18.04
 
 RUN apt-get update && \
     apt-get install -y python3-pip && \
+    apt-get install -y libpq-dev python-dev && \ 
     apt-get clean
 
-WORKDIR /code/
-ADD ./backend /code
+WORKDIR /djangoproject
+ADD . /djangoproject
 RUN pip3 install -r requirements.txt
 
-EXPOSE 8000
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+ENV PYTHONUNBUFFERED=1
+
+EXPOSE 80
+CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:80"]

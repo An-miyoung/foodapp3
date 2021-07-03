@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Axios from "axios";
+import { axiosInstance } from "api";
 import Shop from "./Shop";
 import { useAppContext } from "store";
 
 export default function ShopList() {
     const { store: { jwtToken } } = useAppContext();
     
-    const apiUrl = "http://localhost:8000/api/shops/";
+    const apiUrl = "/api/shops/";
     const [shopList, setShopList] = useState([]);
 
     useEffect(() => {
         const headers = { 'Authorization': `JWT ${jwtToken}` };
-        Axios.get(apiUrl)
+        axiosInstance.get(apiUrl)
         .then(response => {
             const { data } = response;
             setShopList(data);

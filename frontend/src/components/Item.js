@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Axios from "axios";
+import React from "react";
+import { axiosInstance } from "api";
 import { Button, Card, Form , InputNumber } from "antd";
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
@@ -9,12 +9,11 @@ import { useAppContext } from "store";
 export default function Item({item}) {
     const { store: {jwtToken}} = useAppContext();
     const { id, shop, name, photo, price } = item;
-    console.log("item: ", item);
     const { id:shopId } = shop ;
 
     const [keyboard, setKeyboard] = React.useState(true);
     const history = useHistory();
-    const apiUrl = `http://localhost:8000/api/shops/${shopId}/items/${id}/order/`;
+    const apiUrl = `/api/shops/${shopId}/items/${id}/order/`;
 
     const onFinish = (values) => {
         async function fn() {
@@ -27,7 +26,7 @@ export default function Item({item}) {
             formData.append("quantity", quantity);
 
             try {
-                const response = await Axios.post(`http://localhost:8000/api/shops/${shopId}/items/${id}/order/`, formData, {headers});  
+                const response = await axiosInstance.post(`/api/shops/${shopId}/items/${id}/order/`, formData, {headers});  
             }
             catch(error) {
                 console.log(error)

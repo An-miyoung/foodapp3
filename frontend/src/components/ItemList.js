@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Axios from "axios";
+import { axiosInstance } from "api";
 import Item from "./Item";
 import { useAppContext } from "store";
 import { useLocation } from "react-router";
@@ -15,9 +15,9 @@ export default function ItemList() {
 
     useEffect(() => {
         const headers = { Authorization: `JWT ${jwtToken}` };
-        const apiUrl = `http://localhost:8000/api/shops/${shop_id}/items/`;
+        const apiUrl = `/api/shops/${shop_id}/items/`;
     
-        Axios.get(apiUrl, { headers })
+        axiosInstance.get(apiUrl, { headers })
         .then(response => {
             const { data } = response;
             setItemList(data);
