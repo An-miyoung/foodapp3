@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Card } from "antd";
 import { Link } from 'react-router-dom';
-// import ItemList from "./ItemList";
 
 
 export default function Shop({shop}) {

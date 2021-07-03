@@ -8,7 +8,6 @@ export default function ItemList() {
     const location = useLocation();
     const init_shop_id = 1;
     const { shop_id } = location.state || init_shop_id;
-    console.log("shop_id: ", shop_id);
     
 
     const { store: { jwtToken }, dispatch } = useAppContext();

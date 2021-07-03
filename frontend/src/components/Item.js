@@ -12,9 +12,6 @@ export default function Item({item}) {
     console.log("item: ", item);
     const { id:shopId } = shop ;
 
-    console.log("shopId: ", shopId);
-    console.log("itemId: ", id);
-
     const [keyboard, setKeyboard] = React.useState(true);
     const history = useHistory();
     const apiUrl = `http://localhost:8000/api/shops/${shopId}/items/${id}/order/`;
@@ -28,14 +25,9 @@ export default function Item({item}) {
 
             const formData = new FormData();
             formData.append("quantity", quantity);
-            console.log("post시작1")
 
             try {
-                console.log("post시작2")
-                const response = await Axios.post(`http://localhost:8000/api/shops/${shopId}/items/${id}/order/`, formData, {headers});
-                
-                console.log("order-response: ", response);
-                
+                const response = await Axios.post(`http://localhost:8000/api/shops/${shopId}/items/${id}/order/`, formData, {headers});  
             }
             catch(error) {
                 console.log(error)

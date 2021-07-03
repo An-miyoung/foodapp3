@@ -13,7 +13,6 @@ export default function ShopList() {
         const headers = { 'Authorization': `JWT ${jwtToken}` };
         Axios.get(apiUrl)
         .then(response => {
-            console.log("response: ", response)
             const { data } = response;
             setShopList(data);
         })

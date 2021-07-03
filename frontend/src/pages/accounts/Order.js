@@ -1,11 +1,7 @@
-
-import { Button, Card } from "antd";
-import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useAppContext } from "store";
 import {useLocation} from "react-router";
-// import ItemList from "./ItemList";
 
 
 export default function Order(props) {
@@ -38,12 +34,12 @@ export default function Order(props) {
     return (
         <>
         <div>
-            <h3>주문내역입니다</h3>
-            { orderList && orderList.map((order) => (
+            <h1>주문해 주셔서 감사합니다.</h1>
+            {/* { orderList && orderList.map((order) => (
                 <>
                 {JSON.stringify(order)}
                 </>
-            ))}
+            ))} */}
         </div>
         </>
     );

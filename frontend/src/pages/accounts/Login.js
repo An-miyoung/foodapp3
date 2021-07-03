@@ -23,7 +23,6 @@ export default function Login() {
             try {
                 const response = await Axios.post("http://localhost:8000/accounts/token/", data);
                 const { data: { token: jwtToken } } = response;
-                console.log("jwtToken: ", jwtToken);
 
                 dispatch(setToken(jwtToken));
 
@@ -31,7 +30,6 @@ export default function Login() {
                     message: "로그인했습니다.",
                     icon: <SmileOutlined style={{ color: "#108ee9"}}/>
                 })
-                // history.push("/");
                 history.push(loginRedirectUrl);
                 
             }
